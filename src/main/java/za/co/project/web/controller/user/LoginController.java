@@ -1,4 +1,4 @@
-package za.co.project.controller.user;
+package za.co.project.web.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import za.co.project.model.user.User;
 import za.co.project.service.user.UserService;
+import za.co.project.web.view.user.UserForm;
 
 import javax.validation.Valid;
 
@@ -40,9 +41,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid UserForm userForm, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
+        User userExists = userService.findUserByEmail(userForm.getEmail());
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
@@ -51,10 +52,10 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("user/registration/index");
         } else {
-            userService.saveUser(user);
+            userService.saveUser(userForm);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("user/registration/index");
+            modelAndView.setViewName("home/signed_in/index");
 
         }
         return modelAndView;
@@ -74,7 +75,7 @@ public class LoginController {
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getSurname() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users");
-        modelAndView.setViewName("home/signedin/index");
+        modelAndView.setViewName("home/signed_in/index");
         return modelAndView;
     }
 }

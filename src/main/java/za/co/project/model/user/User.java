@@ -1,10 +1,6 @@
 package za.co.project.model.user;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,23 +15,16 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "email")
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
-    @Transient
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
-    @NotEmpty(message = "*Please provide your surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     @Column(name = "active")

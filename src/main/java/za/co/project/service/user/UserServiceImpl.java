@@ -9,6 +9,7 @@ import za.co.project.model.user.UserRole;
 import za.co.project.repository.user.RoleRepository;
 import za.co.project.repository.user.UserRepository;
 import za.co.project.repository.user.UserRoleRepository;
+import za.co.project.web.view.user.UserForm;
 
 /**
  * Created by Azael on 2017/07/13.
@@ -32,8 +33,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void saveUser(User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    public void saveUser(UserForm userForm) {
+        User user = new User();
+        user.setEmail(userForm.getEmail());
+        user.setName(userForm.getName());
+        user.setSurname(userForm.getSurname());
+        user.setPassword(new BCryptPasswordEncoder().encode(userForm.getPassword()));
         user.setActive(true);
         userRepository.save(user);
         saveUserRole(user, "USER");

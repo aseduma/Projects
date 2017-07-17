@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Projects</title>
 </head>
 <body>
-    <p>Please sign in </p>
+    <h1>Projects</h1>
+
+    <a id="sign-in" type="submit"  th:href="|/login|">Sign In</a>
+    <a id="sign-up" type="submit"  th:href="|/registration|">Sign Up</a>
 </body>
 </html>

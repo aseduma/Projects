@@ -17,8 +17,8 @@ create database project;
 create database efas;
 create database pmt;
 
-#
 Run the project
 Hibernate will create tables for you
+#
 INSERT INTO `project`.`role` (`role`, `description`) VALUES ('ADMIN', 'Administrator');
 INSERT INTO `project`.`role` (`role`, `description`) VALUES ('USER', 'User');

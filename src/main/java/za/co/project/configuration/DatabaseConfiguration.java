@@ -27,11 +27,13 @@ public class DatabaseConfiguration {
 
     @Value("${spring.datasource.password}")
     private String password;
+
     @Value("${spring.datasource.url}")
     private String url;
-    //For multiple db connection
+
     @Value("${spring.datasource.pmt.url}")
     private String pmtUrl;
+
     @Value("${spring.datasource.efas.url}")
     private String efasUrl;
 
